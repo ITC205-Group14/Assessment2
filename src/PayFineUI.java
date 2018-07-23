@@ -22,7 +22,7 @@ public class PayFineUI {
 	public void setState(UI_STATE state) {
 		this.state = state;
 	}
-
+	
 
 	public void run() {
 		output("Pay Fine Use Case UI\n");
