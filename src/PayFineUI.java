@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 public class PayFineUI {
 
-
 	public static enum UI_STATE { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
 
 	private PayFineControl control;
