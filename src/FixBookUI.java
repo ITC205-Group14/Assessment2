@@ -3,21 +3,21 @@ import java.util.Scanner;
 
 public class FixBookUI {
 
-	public static enum UI_STATE { INITIALISED, READY, FIXING, COMPLETED };
+	public static enum UiState { INITIALISED, READY, FIXING, COMPLETED };
 	private FixBookControl control;
 	private Scanner input;
-	private UI_STATE state;
+	private UiState state;
 
 	
 	public FixBookUI(FixBookControl control) {
 		this.control = control;
 		input = new Scanner(System.in);
-		state = UI_STATE.INITIALISED;
+		state = UiState.INITIALISED;
 		control.setUI(this);
 	}
 
 
-	public void setState(UI_STATE state) {
+	public void setState(UiState state) {
 		this.state = state;
 	}
 
@@ -61,10 +61,8 @@ public class FixBookUI {
 			default:
 				output("Unhandled state");
 				throw new RuntimeException("FixBookUI : unhandled state :" + state);			
-			
 			}		
-		}
-		
+		}		
 	}
 
 	
