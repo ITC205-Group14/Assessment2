@@ -29,6 +29,7 @@ public class BorrowBookControl {
 		
 	public void Swiped(int memberId) {
 		if (!state.equals(ControlState.READY)) 
+		{
 			throw new RuntimeException("BorrowBookControl: cannot call cardSwiped except in READY state");}
 	{	
 		member = library.getMember(memberId);
@@ -43,7 +44,10 @@ public class BorrowBookControl {
 		else 
 		{
 			ui.display("Member cannot borrow at this time");
-			ui.setState(BorrowBookUI.UiState.RESTRICTED); }}
+			ui.setState(BorrowBookUI.UiState.RESTRICTED); 
+		}
+	}
+}
 	
 	
 	public void Scanned(int bookId) 
@@ -81,7 +85,7 @@ public class BorrowBookControl {
 				ui.display(book.toString());
 			}
 			completedLoans = new ArrayList<loan>();
-			ui.setState(BorrowBookUI.UI_STATE.FINALISING);
+			ui.setState(BorrowBookUI.UiState.FINALISING);
 			state = ControlState.FINALISING;
 		}
 	}
@@ -99,16 +103,14 @@ public class BorrowBookControl {
 		for (loan loan : completedLoans) {
 			ui.display(loan.toString());
 		}
-		ui.setState(BorrowBookUI.UI_STATE.COMPLETED);
+		ui.setState(BorrowBookUI.UiState.COMPLETED);
 		state = ControlState.COMPLETED;
 	}
 
 	
 	public void cancel() {
-		ui.setState(BorrowBookUI.UI_STATE.CANCELLED);
+		ui.setState(BorrowBookUI.UiState.CANCELLED);
 		state = ControlState.CANCELLED;
-	}
-	
-	
+	}	
 	
 }
