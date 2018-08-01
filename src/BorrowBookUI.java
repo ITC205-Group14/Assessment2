@@ -52,7 +52,7 @@ public class BorrowBookUI {
 				}
 				try {
 					int memberId = Integer.valueOf(memberInput).intValue();
-					control.Swiped(memberId);
+					control.swiped(memberId);
 				}
 				catch (NumberFormatException e) {
 					output("Invalid Member Id");
@@ -67,12 +67,12 @@ public class BorrowBookUI {
 			case SCANNING:
 				String bookInputID = input("Scan Book (<enter> completes): ");
 				if (bookInputID.length() == 0) {
-					control.Complete();
+					control.complete();
 					break;
 				}
 				try {
 					int bookId = Integer.valueOf(bookInputID).intValue();
-					control.Scanned(bookId);
+					control.scanned(bookId);
 					
 				} catch (NumberFormatException e) {
 					output("Invalid Book Id");
