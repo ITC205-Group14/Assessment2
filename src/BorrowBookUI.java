@@ -47,13 +47,13 @@ public class BorrowBookUI {
 
 				
 			case READY:
-				String memStr = input("Swipe member card (press <enter> to cancel): ");
-				if (memStr.length() == 0) {
+				String memberInput = input("Swipe member card (press <enter> to cancel): ");
+				if (memberInput.length() == 0) {
 					control.cancel();
 					break;
 				}
 				try {
-					int memberId = Integer.valueOf(memStr).intValue();
+					int memberId = Integer.valueOf(memberInput).intValue();
 					control.Swiped(memberId);
 				}
 				catch (NumberFormatException e) {
@@ -69,13 +69,13 @@ public class BorrowBookUI {
 			
 				
 			case SCANNING:
-				String bookStr = input("Scan Book (<enter> completes): ");
-				if (bookStr.length() == 0) {
+				String bookInputID = input("Scan Book (<enter> completes): ");
+				if (bookInputID.length() == 0) {
 					control.Complete();
 					break;
 				}
 				try {
-					int bookId = Integer.valueOf(bookStr).intValue();
+					int bookId = Integer.valueOf(bookInputID).intValue();
 					control.Scanned(bookId);
 					
 				} catch (NumberFormatException e) {
@@ -85,8 +85,8 @@ public class BorrowBookUI {
 					
 				
 			case FINALISING:
-				String ans = input("Commit loans? (Y/N): ");
-				if (ans.toUpperCase().equals("N")) {
+				String answer = input("Commit loans? (Y/N): ");
+				if (answer.toUpperCase().equals("N")) {
 					control.cancel();
 					
 				} else {
