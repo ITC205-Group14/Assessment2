@@ -49,11 +49,9 @@ public class BorrowBookControl {
 			ui.setState(BorrowBookUI.UiState.RESTRICTED); 
 		}
 	}
-
 	
 	
-	public void Scanned(int bookId) 
-	{
+	public void scanned(int bookId) {
 		book = null;
 		if (!state.equals(ControlState.SCANNING)) {
 			throw new RuntimeException("BorrowBookControl: cannot call bookScanned except in SCANNING state");
@@ -72,12 +70,12 @@ public class BorrowBookControl {
 		}
 		if (library.loansRemainingForMember(member) - pendingBooks.size() == 0) {
 			ui.display("Loan limit reached");
-			Complete();
+			complete();
 		}
 	}
 	
 		
-	public void Complete() {
+	public void complete() {
 		if (pendingBooks.size() == 0) {
 			cancel();
 		}
