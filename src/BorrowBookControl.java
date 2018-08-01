@@ -43,8 +43,7 @@ public class BorrowBookControl {
 			pendingBooks = new ArrayList<>();
 			ui.setState(BorrowBookUI.UiState.SCANNING);
 			state = ControlState.SCANNING; }
-		else 
-		{
+		else {
 			ui.display("Member cannot borrow at this time");
 			ui.setState(BorrowBookUI.UiState.RESTRICTED); 
 		}
