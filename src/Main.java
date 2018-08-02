@@ -1,4 +1,5 @@
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 
@@ -121,7 +122,8 @@ public class Main {
 	}
 
 	private static void payFine() {
-		new PayFineUI(new PayFineControl()).run();		
+		PayFineControl payFineControl = new PayFineControl(); 
+		new PayFineUI(payFineControl).run();		
 	}
 
 
@@ -150,17 +152,20 @@ public class Main {
 
 
 	private static void borrowBook() {
-		new BorrowBookUI(new BorrowBookControl()).run();
+		BorrowBookControl borrowBookControl = new BorrowBookControl();
+		new BorrowBookUI(borrowBookControl).run();
 	}
 
 
 	private static void returnBook() {
-		new ReturnBookUI(new ReturnBookControl()).run();
+		ReturnBookControl returnBookControl = new ReturnBookControl();
+		new ReturnBookUI(returnBookControl).run();
 	}
 
 
 	private static void fixBooks() {
-		new FixBookUI(new FixBookControl()).run();
+		FixBookControl fixBookControl = new FixBookControl();
+		new FixBookUI(fixBookControl).run();
 	}
 
 
@@ -169,7 +174,10 @@ public class Main {
 			int days = Integer.valueOf(input("Enter number of days: ")).intValue();
 			calendar.incrementDate(days);
 			LIB.checkCurrentLoans();
-			output(simpleDateFormat.format(calendar.Date()));
+			
+			Date date = calendar.Date();
+			String formattedDate = simpleDateFormat.format(date);
+			output(formattedDate);
 
 		} catch (NumberFormatException e) {
 			 output("\nInvalid number of days\n");
@@ -192,7 +200,8 @@ public class Main {
 			String lastName = input("Enter last name: ");
 			String firstName  = input("Enter first name: ");
 			String email = input("Enter email: ");
-			int phoneNumber = Integer.valueOf(input("Enter phone number: ")).intValue();
+			String phoneNumberInput = input("Enter phone number: ");
+			int phoneNumber = Integer.valueOf(phoneNumberInput).intValue();
 			member member = LIB.Add_mem(lastName, firstName, email, phoneNumber);
 			output("\n" + member + "\n");
 
