@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Main {
 	
-	private static Scanner IN;
+	private static Scanner in;
 	private static library LIB;
-	private static String MENU;
-	private static Calendar CAL;
-	private static SimpleDateFormat SDF;
+	private static String menuText;
+	private static Calendar calendar;
+	private static SimpleDateFormat simpleDateFormat;
 	
 	
 	private static String Get_menu() {
@@ -39,27 +39,27 @@ public class Main {
 
 	public static void main(String[] args) {		
 		try {			
-			IN = new Scanner(System.in);
+			in = new Scanner(System.in);
 			LIB = library.INSTANCE();
-			CAL = Calendar.getInstance();
-			SDF = new SimpleDateFormat("dd/MM/yyyy");
+			calendar = Calendar.getInstance();
+			simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	
-			for (member m : LIB.Members()) {
-				output(m);
+			for (member member : LIB.Members()) {
+				output(member);
 			}
 			output(" ");
-			for (book b : LIB.Books()) {
-				output(b);
+			for (book book : LIB.Books()) {
+				output(book);
 			}
 						
-			MENU = Get_menu();
+			menuText = Get_menu();
 			
-			boolean e = false;
+			boolean quit = false;
 			
-			while (!e) {
+			while (!quit) {
 				
-				output("\n" + SDF.format(CAL.Date()));
-				String c = input(MENU);
+				output("\n" + simpleDateFormat.format(calendar.Date()));
+				String c = input(menuText);
 				
 				switch (c.toUpperCase()) {
 				
@@ -104,7 +104,7 @@ public class Main {
 					break;
 					
 				case "Q": 
-					e = true;
+					quit = true;
 					break;
 					
 				default: 
@@ -170,9 +170,9 @@ public class Main {
 	private static void incrementDate() {
 		try {
 			int days = Integer.valueOf(input("Enter number of days: ")).intValue();
-			CAL.incrementDate(days);
+			calendar.incrementDate(days);
 			LIB.checkCurrentLoans();
-			output(SDF.format(CAL.Date()));
+			output(simpleDateFormat.format(calendar.Date()));
 			
 		} catch (NumberFormatException e) {
 			 output("\nInvalid number of days\n");
@@ -184,8 +184,8 @@ public class Main {
 		
 		String author = input("Enter author: ");
 		String title  = input("Enter title: ");
-		String callNo = input("Enter call number: ");
-		book book = LIB.Add_book(author, title, callNo);
+		String callNumber = input("Enter call number: ");
+		book book = LIB.Add_book(author, title, callNumber);
 		output("\n" + book + "\n");
 		
 	}
@@ -196,8 +196,8 @@ public class Main {
 			String lastName = input("Enter last name: ");
 			String firstName  = input("Enter first name: ");
 			String email = input("Enter email: ");
-			int phoneNo = Integer.valueOf(input("Enter phone number: ")).intValue();
-			member member = LIB.Add_mem(lastName, firstName, email, phoneNo);
+			int phoneNumber = Integer.valueOf(input("Enter phone number: ")).intValue();
+			member member = LIB.Add_mem(lastName, firstName, email, phoneNumber);
 			output("\n" + member + "\n");
 			
 		} catch (NumberFormatException e) {
@@ -209,7 +209,7 @@ public class Main {
 
 	private static String input(String prompt) {
 		System.out.print(prompt);
-		return IN.nextLine();
+		return in.nextLine();
 	}
 	
 	
