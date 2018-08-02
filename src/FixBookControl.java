@@ -3,7 +3,7 @@ public class FixBookControl {
 	private FixBookUI ui;
 	private enum ControlState { INITIALISED, READY, FIXING };
 	private ControlState state;	
-	private library library;
+	private Library library;
 	private book currentBook;
 
 
