@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -108,17 +109,23 @@ public class Library implements Serializable {
 
 
 	public List<member> getMembers() {
-		return new ArrayList<member>(members.values());
+		Collection<member> memberCollection = members.values();
+		ArrayList<member> memberList = new ArrayList<member>(memberCollection);
+		return memberList;
 	}
 
 	
 	public List<book> getBooks() {
-		return new ArrayList<book>(catalog.values());
+		Collection<book> booksCollection = catalog.values();
+		ArrayList<book> booksList = new ArrayList<book>(booksCollection);
+		return booksList;
 	}
 
 
 	public List<loan> getCurrentLoans() {
-		return new ArrayList<loan>(currentLoans.values());
+		Collection<loan> loansCollection = currentLoans.values();
+		ArrayList<loan> loansList = new ArrayList<loan>(loansCollection);
+		return loansList;
 	}
 
 
@@ -181,7 +188,9 @@ public class Library implements Serializable {
 
 
 	public int getLoansRemainingForMember(member member) {
-		return loanLimit - member.getNumberOfCurrentLoans();
+		int currentLoans = member.getNumberOfCurrentLoans();
+		int remainingLoans = loanLimit - currentLoans;
+		return remainingLoans;
 	}
 
 
