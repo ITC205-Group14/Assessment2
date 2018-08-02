@@ -40,15 +40,15 @@ public class Main {
 	public static void main(String[] args) {		
 		try {			
 			IN = new Scanner(System.in);
-			LIB = Library.INSTANCE();
+			LIB = Library.getInstance();
 			CAL = Calendar.getInstance();
 			SDF = new SimpleDateFormat("dd/MM/yyyy");
 	
-			for (member m : LIB.Members()) {
+			for (member m : LIB.getMembers()) {
 				output(m);
 			}
 			output(" ");
-			for (book b : LIB.Books()) {
+			for (book b : LIB.getBooks()) {
 				output(b);
 			}
 						
@@ -112,7 +112,7 @@ public class Main {
 					break;
 				}
 				
-				Library.SAVE();
+				Library.save();
 			}			
 		} catch (RuntimeException e) {
 			output(e);
@@ -127,7 +127,7 @@ public class Main {
 
 	private static void listCurrentLoans() {
 		output("");
-		for (loan loan : LIB.CurrentLoans()) {
+		for (loan loan : LIB.getCurrentLoans()) {
 			output(loan + "\n");
 		}		
 	}
@@ -136,7 +136,7 @@ public class Main {
 
 	private static void listBooks() {
 		output("");
-		for (book book : LIB.Books()) {
+		for (book book : LIB.getBooks()) {
 			output(book + "\n");
 		}		
 	}
@@ -145,7 +145,7 @@ public class Main {
 
 	private static void listMembers() {
 		output("");
-		for (member member : LIB.Members()) {
+		for (member member : LIB.getMembers()) {
 			output(member + "\n");
 		}		
 	}
@@ -185,7 +185,7 @@ public class Main {
 		String author = input("Enter author: ");
 		String title  = input("Enter title: ");
 		String callNo = input("Enter call number: ");
-		book book = LIB.Add_book(author, title, callNo);
+		book book = LIB.addBook(author, title, callNo);
 		output("\n" + book + "\n");
 		
 	}
@@ -197,7 +197,7 @@ public class Main {
 			String firstName  = input("Enter first name: ");
 			String email = input("Enter email: ");
 			int phoneNo = Integer.valueOf(input("Enter phone number: ")).intValue();
-			member member = LIB.Add_mem(lastName, firstName, email, phoneNo);
+			member member = LIB.addMember(lastName, firstName, email, phoneNo);
 			output("\n" + member + "\n");
 			
 		} catch (NumberFormatException e) {

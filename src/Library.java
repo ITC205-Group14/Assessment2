@@ -47,7 +47,7 @@ public class Library implements Serializable {
 	}
 
 	
-	public static synchronized Library INSTANCE() {		
+	public static synchronized Library getInstance() {		
 		if (self == null) {
 			Path path = Paths.get(libraryFile);			
 			if (Files.exists(path)) {	
@@ -67,7 +67,7 @@ public class Library implements Serializable {
 	}
 
 	
-	public static synchronized void SAVE() {
+	public static synchronized void save() {
 		if (self != null) {
 			self.loadDate = Calendar.getInstance().Date();
 			try (ObjectOutputStream lof = new ObjectOutputStream(new FileOutputStream(libraryFile));) {
@@ -82,55 +82,55 @@ public class Library implements Serializable {
 	}
 
 	
-	public int BookID() {
+	public int getBookID() {
 		return bookId;
 	}
 	
 	
-	public int MemberID() {
+	public int getMemberID() {
 		return memberId;
 	}
 	
 	
-	private int nextBID() {
+	private int getNextBookId() {
 		return bookId++;
 	}
 
 	
-	private int nextMID() {
+	private int getNextMemberId() {
 		return memberId++;
 	}
 
 	
-	private int nextLID() {
+	private int getNextLoanId() {
 		return loanId++;
 	}
 
 	
-	public List<member> Members() {		
+	public List<member> getMembers() {		
 		return new ArrayList<member>(members.values()); 
 	}
 
 
-	public List<book> Books() {		
+	public List<book> getBooks() {		
 		return new ArrayList<book>(catalog.values()); 
 	}
 
 
-	public List<loan> CurrentLoans() {
+	public List<loan> getCurrentLoans() {
 		return new ArrayList<loan>(currentLoans.values());
 	}
 
 
-	public member Add_mem(String lastName, String firstName, String email, int phoneNumber) {		
-		member member = new member(lastName, firstName, email, phoneNumber, nextMID());
+	public member addMember(String lastName, String firstName, String email, int phoneNumber) {		
+		member member = new member(lastName, firstName, email, phoneNumber, getNextMemberId());
 		members.put(member.getId(), member);		
 		return member;
 	}
 
 	
-	public book Add_book(String author, String title, String callNumber) {		
-		book book = new book(author, title, callNumber, nextBID());
+	public book addBook(String author, String title, String callNumber) {		
+		book book = new book(author, title, callNumber, getNextBookId());
 		catalog.put(book.ID(), book);		
 		return book;
 	}
@@ -143,14 +143,14 @@ public class Library implements Serializable {
 	}
 
 	
-	public book Book(int bookId) {
+	public book getBook(int bookId) {
 		if (catalog.containsKey(bookId)) 
 			return catalog.get(bookId);		
 		return null;
 	}
 
 	
-	public int loanLimit() {
+	public int getLoanLimit() {
 		return loanLimit;
 	}
 
@@ -170,14 +170,14 @@ public class Library implements Serializable {
 	}
 
 	
-	public int loansRemainingForMember(member member) {		
+	public int getLoansRemainingForMember(member member) {		
 		return loanLimit - member.getNumberOfCurrentLoans();
 	}
 
 	
 	public loan issueLoan(book book, member member) {
 		Date dueDate = Calendar.getInstance().getDueDate(loanPeriod);
-		loan loan = new loan(nextLID(), book, member, dueDate);
+		loan loan = new loan(getNextLoanId(), book, member, dueDate);
 		member.takeOutLoan(loan);
 		book.Borrow();
 		loans.put(loan.getId(), loan);
