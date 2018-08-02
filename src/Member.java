@@ -22,11 +22,11 @@ public class Member implements Serializable {
 		this.emailAddress = email;
 		this.phoneNumber = phoneNo;
 		this.id = id;
-		
+
 		this.loans = new HashMap<>();
 	}
 
-	
+
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Member:  ").append(id).append("\n")
@@ -36,34 +36,34 @@ public class Member implements Serializable {
 		  .append("\n")
 		  .append(String.format("  Fines Owed :  $%.2f", fines))
 		  .append("\n");
-		
+
 		for (loan loan : loans.values()) {
 			sb.append(loan).append("\n");
-		}		  
+		}
 		return sb.toString();
 	}
 
-	
+
 	public int getId() {
 		return id;
 	}
 
-	
+
 	public List<loan> getLoans() {
 		return new ArrayList<loan>(loans.values());
 	}
 
-	
+
 	public int getNumberOfCurrentLoans() {
 		return loans.size();
 	}
 
-	
+
 	public double getFinesOwed() {
 		return fines;
 	}
 
-	
+
 	public void takeOutLoan(loan loan) {
 		int loanId = loan.getId();
 		if (!loans.containsKey(loanId)) {
@@ -71,15 +71,15 @@ public class Member implements Serializable {
 		}
 		else {
 			throw new RuntimeException("Duplicate loan added to member");
-		}		
+		}
 	}
 
-	
+
 	public String getLastName() {
 		return lastName;
 	}
 
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -88,8 +88,8 @@ public class Member implements Serializable {
 	public void addFine(double fine) {
 		fines += fine;
 	}
-	
-	
+
+
 	public double payFine(double amount) {
 		if (amount < 0) {
 			throw new RuntimeException("Member.payFine: amount must be positive");
@@ -113,8 +113,8 @@ public class Member implements Serializable {
 		}
 		else {
 			throw new RuntimeException("No such loan held by member");
-		}		
+		}
 	}
 
-	
+
 }
