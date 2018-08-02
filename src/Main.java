@@ -3,17 +3,17 @@ import java.util.Scanner;
 
 
 public class Main {
-	
+
 	private static Scanner in;
 	private static library LIB;
 	private static String menuText;
 	private static Calendar calendar;
 	private static SimpleDateFormat simpleDateFormat;
-	
-	
+
+
 	private static String getMenu() {
 		StringBuilder sb = new StringBuilder();
-		
+
 		sb.append("\nLibrary Main Menu\n\n")
 		  .append("  M  : add member\n")
 		  .append("  LM : list members\n")
@@ -32,18 +32,18 @@ public class Main {
 		  .append("  Q  : quit\n")
 		  .append("\n")
 		  .append("Choice : ");
-		  
+
 		return sb.toString();
 	}
 
 
-	public static void main(String[] args) {		
-		try {			
+	public static void main(String[] args) {
+		try {
 			in = new Scanner(System.in);
 			LIB = library.INSTANCE();
 			calendar = Calendar.getInstance();
 			simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-	
+
 			for (member member : LIB.Members()) {
 				output(member);
 			}
@@ -51,76 +51,76 @@ public class Main {
 			for (book book : LIB.Books()) {
 				output(book);
 			}
-						
+
 			menuText = getMenu();
-			
+
 			boolean quit = false;
-			
+
 			while (!quit) {
-				
+
 				output("\n" + simpleDateFormat.format(calendar.Date()));
 				String c = input(menuText);
-				
+
 				switch (c.toUpperCase()) {
-				
-				case "M": 
+
+				case "M":
 					addMember();
 					break;
-					
-				case "LM": 
+
+				case "LM":
 					listMembers();
 					break;
-					
+
 				case "B": 
 					addBook();
 					break;
-					
+
 				case "LB": 
 					listBooks();
 					break;
-					
-				case "FB": 
+
+				case "FB":
 					fixBooks();
 					break;
 					
 				case "L": 
 					borrowBook();
 					break;
-					
-				case "R": 
+
+				case "R":
 					returnBook();
 					break;
-					
+
 				case "LL": 
 					listCurrentLoans();
 					break;
-					
+
 				case "P": 
 					payFine();
 					break;
-					
+
 				case "T": 
 					incrementDate();
 					break;
-					
+
 				case "Q": 
 					quit = true;
 					break;
-					
-				default: 
+
+				default:
 					output("\nInvalid option\n");
 					break;
 				}
-				
+
 				library.SAVE();
-			}			
+			}
 		} catch (RuntimeException e) {
 			output(e);
-		}		
+		}
 		output("\nEnded\n");
-	}	
+	}
 
-		private static void payFine() {
+	private static void payFine() {
 		new PayFineUI(new PayFineControl()).run();		
 	}
 
@@ -129,41 +129,38 @@ public class Main {
 		output("");
 		for (loan loan : LIB.CurrentLoans()) {
 			output(loan + "\n");
-		}		
+		}
 	}
-
 
 
 	private static void listBooks() {
 		output("");
 		for (book book : LIB.Books()) {
 			output(book + "\n");
-		}		
+		}
 	}
-
 
 
 	private static void listMembers() {
 		output("");
 		for (member member : LIB.Members()) {
 			output(member + "\n");
-		}		
+		}
 	}
 
 
-
 	private static void borrowBook() {
-		new BorrowBookUI(new BorrowBookControl()).run();		
+		new BorrowBookUI(new BorrowBookControl()).run();
 	}
 
 
 	private static void returnBook() {
-		new ReturnBookUI(new ReturnBookControl()).run();		
+		new ReturnBookUI(new ReturnBookControl()).run();
 	}
 
 
 	private static void fixBooks() {
-		new FixBookUI(new FixBookControl()).run();		
+		new FixBookUI(new FixBookControl()).run();
 	}
 
 
@@ -173,7 +170,7 @@ public class Main {
 			calendar.incrementDate(days);
 			LIB.checkCurrentLoans();
 			output(simpleDateFormat.format(calendar.Date()));
-			
+
 		} catch (NumberFormatException e) {
 			 output("\nInvalid number of days\n");
 		}
@@ -181,16 +178,15 @@ public class Main {
 
 
 	private static void addBook() {
-		
 		String author = input("Enter author: ");
 		String title  = input("Enter title: ");
 		String callNumber = input("Enter call number: ");
 		book book = LIB.Add_book(author, title, callNumber);
 		output("\n" + book + "\n");
-		
+
 	}
 
-	
+
 	private static void addMember() {
 		try {
 			String lastName = input("Enter last name: ");
@@ -199,11 +195,11 @@ public class Main {
 			int phoneNumber = Integer.valueOf(input("Enter phone number: ")).intValue();
 			member member = LIB.Add_mem(lastName, firstName, email, phoneNumber);
 			output("\n" + member + "\n");
-			
+
 		} catch (NumberFormatException e) {
 			 output("\nInvalid phone number\n");
 		}
-		
+
 	}
 
 
@@ -211,12 +207,11 @@ public class Main {
 		System.out.print(prompt);
 		return in.nextLine();
 	}
-	
-	
-	
+
+
 	private static void output(Object object) {
 		System.out.println(object);
 	}
 
-	
+
 }
