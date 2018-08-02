@@ -13,7 +13,6 @@ public class Member implements Serializable {
 	private int phoneNumber;
 	private int id;
 	private double fines;
-	
 	private Map<Integer, loan> loans;
 
 	
@@ -90,6 +89,7 @@ public class Member implements Serializable {
 		fines += fine;
 	}
 	
+	
 	public double payFine(double amount) {
 		if (amount < 0) {
 			throw new RuntimeException("Member.payFine: amount must be positive");
@@ -116,4 +116,5 @@ public class Member implements Serializable {
 		}		
 	}
 
+	
 }
