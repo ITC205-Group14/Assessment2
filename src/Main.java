@@ -12,7 +12,7 @@ public class Main {
 	private static SimpleDateFormat simpleDateFormat;
 
 
-	private static String getMenu() {
+	private static String getMenuText() {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("\nLibrary Main Menu\n\n")
@@ -53,7 +53,7 @@ public class Main {
 				output(book);
 			}
 
-			menuText = getMenu();
+			menuText = getMenuText();
 
 			boolean quit = false;
 
