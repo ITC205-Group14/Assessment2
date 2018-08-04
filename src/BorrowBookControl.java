@@ -3,7 +3,7 @@ import java.util.List;
 
 public class BorrowBookControl {	
 	private BorrowBookUI ui;	
-	private library library;
+	private Library library;
 	private member member;
 	private enum ControlState { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
 	private ControlState state;	
@@ -13,7 +13,7 @@ public class BorrowBookControl {
 	
 	
 	public BorrowBookControl() {
-		this.library = library.INSTANCE();
+		this.library = library.getInstance();
 		state = ControlState.INITIALISED;
 	}
 	
@@ -55,7 +55,7 @@ public class BorrowBookControl {
 		if (!state.equals(ControlState.SCANNING)) {
 			throw new RuntimeException("BorrowBookControl: cannot call bookScanned except in SCANNING state");
 		}	
-		book = library.Book(bookId);
+		book = library.getBook(bookId);
 		if (book == null) {
 			ui.display("Invalid bookId");
 			return;		}
@@ -67,7 +67,7 @@ public class BorrowBookControl {
 		for (book book : pendingBooks) {
 			ui.display(book.toString());
 		}
-		if (library.loansRemainingForMember(member) - pendingBooks.size() == 0) {
+		if (library.getLoansRemainingForMember(member) - pendingBooks.size() == 0) {
 			ui.display("Loan limit reached");
 			complete();
 		}
