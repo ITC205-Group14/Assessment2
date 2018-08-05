@@ -3,12 +3,12 @@ public class PayFineControl {
 	private PayFineUI ui;
 	private enum CONTROL_STATE { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
 	private CONTROL_STATE state;	
-	private library library;
 	private Member member;;
+	private Library library;
 
-
+	
 	public PayFineControl() {
-		this.library = library.INSTANCE();
+		this.library = library.getInstance();
 		state = CONTROL_STATE.INITIALISED;
 	}
 	

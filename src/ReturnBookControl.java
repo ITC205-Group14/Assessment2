@@ -3,12 +3,12 @@ public class ReturnBookControl {
 	private ReturnBookUI ui;
 	private enum CONTROL_STATE { INITIALISED, READY, INSPECTING };
 	private CONTROL_STATE state;
-	private library library;
+	private Library library;
 	private loan currentLoan;
 	
 
 	public ReturnBookControl() {
-		this.library = library.INSTANCE();
+		this.library = library.getInstance();
 		state = CONTROL_STATE.INITIALISED;
 	}
 	
@@ -30,7 +30,7 @@ public class ReturnBookControl {
 					+ "bookScanned except in READY state");
 		}	
 		
-		book currentBook = library.Book(bookId);
+		book currentBook = library.getBook(bookId);
 		if (currentBook == null) {
 			ui.display("Invalid Book Id");
 			return;
