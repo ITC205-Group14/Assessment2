@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,6 @@ public class Member implements Serializable {
 		this.emailAddress = email;
 		this.phoneNumber = phoneNo;
 		this.id = id;
-
 		this.loans = new HashMap<>();
 	}
 
@@ -50,7 +50,9 @@ public class Member implements Serializable {
 
 
 	public List<loan> getLoans() {
-		return new ArrayList<loan>(loans.values());
+		Collection<loan> loanValues = loans.values();
+		ArrayList<loan> loanList = new ArrayList<loan>(loanValues); 
+		return loanList;
 	}
 
 
