@@ -30,7 +30,7 @@ public class Library implements Serializable {
 	private Date loanDate;
 
 	private Map<Integer, book> catalog;
-	private Map<Integer, member> members;
+	private Map<Integer, Member> members;
 	private Map<Integer, loan> loans;
 	private Map<Integer, loan> currentLoans;
 	private Map<Integer, book> damagedBooks;
@@ -108,9 +108,9 @@ public class Library implements Serializable {
 	}
 
 
-	public List<member> getMembers() {
-		Collection<member> memberCollection = members.values();
-		ArrayList<member> memberList = new ArrayList<member>(memberCollection);
+	public List<Member> getMembers() {
+		Collection<Member> memberCollection = members.values();
+		ArrayList<Member> memberList = new ArrayList<Member>(memberCollection);
 		return memberList;
 	}
 
@@ -129,9 +129,9 @@ public class Library implements Serializable {
 	}
 
 
-	public member addMember(String lastName, String firstName, String email, int phoneNumber) {
+	public Member addMember(String lastName, String firstName, String email, int phoneNumber) {
 		int nextMemberId = getNextMemberId();
-		member member = new member(lastName, firstName, email, phoneNumber, nextMemberId);
+		Member member = new Member(lastName, firstName, email, phoneNumber, nextMemberId);
 		int memberid = member.getId();
 		members.put(memberid, member);
 		return member;
@@ -147,7 +147,7 @@ public class Library implements Serializable {
 	}
 
 
-	public member getMember(int memberId) {
+	public Member getMember(int memberId) {
 		if (members.containsKey(memberId)) {
 			return members.get(memberId);
 		}
@@ -168,7 +168,7 @@ public class Library implements Serializable {
 	}
 
 
-	public boolean memberCanBorrow(member member) {
+	public boolean memberCanBorrow(Member member) {
 		if (member.getNumberOfCurrentLoans() == loanLimit ) {
 			return false;
 		}
@@ -187,14 +187,14 @@ public class Library implements Serializable {
 	}
 
 
-	public int getLoansRemainingForMember(member member) {
+	public int getLoansRemainingForMember(Member member) {
 		int currentLoans = member.getNumberOfCurrentLoans();
 		int remainingLoans = loanLimit - currentLoans;
 		return remainingLoans;
 	}
 
 
-	public loan issueLoan(book book, member member) {
+	public loan issueLoan(book book, Member member) {
 		Date dueDate = Calendar.getInstance().getDueDate(loanPeriod);
 		int nextLoanId = getNextLoanId();
 		int bookId = book.ID();
@@ -228,7 +228,7 @@ public class Library implements Serializable {
 
 
 	public void dischargeLoan(loan currentLoan, boolean isDamaged) {
-		member member = currentLoan.Member();
+		Member member = currentLoan.Member();
 		book book  = currentLoan.Book();
 
 		double overDueFine = calculateOverDueFine(currentLoan);
