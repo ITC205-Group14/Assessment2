@@ -5,18 +5,18 @@ import java.util.Date;
 @SuppressWarnings("serial")
 public class loan implements Serializable {
 	
-
-	public static enum LoanState { CURRENT, OVER_DUE, DISCHARGED };	
-	private int id;
-	private Book book;
+	public static enum LoanState { CURRENT, OVER_DUE, DISCHARGED };
+	
+	private int Id;
+	private book Book;
 	private Member member;
 	private Date date;
 	private LoanState state;
 
 	
-	public loan(int loanId, Book book, Member member, Date dueDate) {
-		this.id = loanId;
-		this.book = book;
+	public loan(int loanId, book book, Member member, Date dueDate) {
+		this.Id = loanId;
+		this.Book = book;
 		this.member = member;
 		this.date = dueDate;
 		this.state = LoanState.CURRENT;
@@ -25,7 +25,7 @@ public class loan implements Serializable {
 	
 	public void checkOverDue() {
 		if (state == LoanState.CURRENT &&
-			Calendar.getInstance().Date().after(Date)) {
+			Calendar.getInstance().Date().after(date)) {
 			this.state = LoanState.OVER_DUE;			
 		}
 	}
@@ -36,8 +36,8 @@ public class loan implements Serializable {
 	}
 
 	
-	public int getId() {
-		return id;
+	public Integer getId() {
+		return Id;
 	}
 
 
@@ -49,26 +49,25 @@ public class loan implements Serializable {
 	public String toString() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-		StringBuilder newString = new StringBuilder();
-		newString.append("Loan:  ").append(id).append("\n")
+		StringBuilder loanDetail = new StringBuilder();
+		loanDetail.append("Loan:  ").append(Id).append("\n")
 		  .append("  Borrower ").append(member.getId()).append(" : ")
 		  .append(member.getLastName()).append(", ").append(member.getFirstName()).append("\n")
-		  .append("  Book ").append(book.id()).append(" : " )
-		  .append(book.Title()).append("\n")
-		  .append("  DueDate: ").append(dateFormat.format(date)).append("\n")
+		  .append("  Book ").append(Id).append(" : " )
+		  .append(Book.Title()).append("\n")
+		  .append("  DueDate: ").append(dateFormat).append("\n")
 		  .append("  State: ").append(state);		
-		return sb.toString();
+		return loanDetail.toString();
 	}
 
 
-
-	public member Member() {
+	public Member member() {
 		return member;
 	}
 
 
 	public book Book() {
-		return book;
+		return Book;
 	}
 
 
