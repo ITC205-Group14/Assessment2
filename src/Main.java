@@ -13,9 +13,9 @@ public class Main {
 
 
 	private static String getMenu() {
-		StringBuilder sb = new StringBuilder();
+		StringBuilder stringBuilder = new StringBuilder();
 
-		sb.append("\nLibrary Main Menu\n\n")
+		stringBuilder.append("\nLibrary Main Menu\n\n")
 		.append("  M  : add member\n")
 		.append("  LM : list members\n")
 		.append("\n")
@@ -34,7 +34,7 @@ public class Main {
 		.append("\n")
 		.append("Choice : ");
 
-		return sb.toString();
+		return stringBuilder.toString();
 	}
 
 
@@ -45,8 +45,8 @@ public class Main {
 			calendar = Calendar.getInstance();
 			simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-			for (Member m : library.getMembers()) {
-				output(m);
+			for (Member member : library.getMembers()) {
+				output(member);
 			}
 			output(" ");
 			for (book book : library.getBooks()) {
@@ -60,9 +60,9 @@ public class Main {
 			while (!running) {
 
 				output("\n" + simpleDateFormat.format(calendar.Date()));
-				String c = input(menu);
+				String userChoice = input(menu);
 
-				switch (c.toUpperCase()) {
+				switch (userChoice.toUpperCase()) {
 
 				case "M":
 					addMember();
