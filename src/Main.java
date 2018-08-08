@@ -218,7 +218,6 @@ public class Main {
 	}
 
 
-
 	private static void output(Object object) {
 		System.out.println(object);
 	}
