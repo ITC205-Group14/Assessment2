@@ -5,6 +5,7 @@ import java.util.Date;
 @SuppressWarnings("serial")
 public class loan implements Serializable {
 	
+
 	public static enum LoanState { CURRENT, OVER_DUE, DISCHARGED };	
 	private int id;
 	private Book book;
@@ -58,6 +59,7 @@ public class loan implements Serializable {
 		  .append("  State: ").append(state);		
 		return sb.toString();
 	}
+
 
 
 	public member Member() {

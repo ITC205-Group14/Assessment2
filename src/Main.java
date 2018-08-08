@@ -44,7 +44,7 @@ public class Main {
 			CAL = Calendar.getInstance();
 			SDF = new SimpleDateFormat("dd/MM/yyyy");
 	
-			for (member m : LIB.getMembers()) {
+			for (Member m : LIB.getMembers()) {
 				output(m);
 			}
 			output(" ");
@@ -145,7 +145,7 @@ public class Main {
 
 	private static void listMembers() {
 		output("");
-		for (member member : LIB.getMembers()) {
+		for (Member member : LIB.getMembers()) {
 			output(member + "\n");
 		}		
 	}
@@ -197,7 +197,7 @@ public class Main {
 			String firstName  = input("Enter first name: ");
 			String email = input("Enter email: ");
 			int phoneNo = Integer.valueOf(input("Enter phone number: ")).intValue();
-			member member = LIB.addMember(lastName, firstName, email, phoneNo);
+			Member member = LIB.addMember(lastName, firstName, email, phoneNo);
 			output("\n" + member + "\n");
 			
 		} catch (NumberFormatException e) {

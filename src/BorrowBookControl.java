@@ -3,8 +3,8 @@ import java.util.List;
 
 public class BorrowBookControl {	
 	private BorrowBookUI ui;	
+	private Member member;
 	private Library library;
-	private member member;
 	private enum ControlState { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
 	private ControlState state;	
 	private List<book> pendingBooks;
