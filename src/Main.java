@@ -200,7 +200,8 @@ public class Main {
 			String lastName = input("Enter last name: ");
 			String firstName  = input("Enter first name: ");
 			String email = input("Enter email: ");
-			int phoneNumber = Integer.valueOf(input("Enter phone number: ")).intValue();
+			String phonuNumberInput = input("Enter phone number: ");
+			int phoneNumber = Integer.valueOf(phonuNumberInput).intValue();
 			Member member = library.addMember(lastName, firstName, email, phoneNumber);
 			output("\n" + member + "\n");
 
