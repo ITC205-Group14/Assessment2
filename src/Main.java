@@ -143,7 +143,6 @@ public class Main {
 	}
 
 
-
 	private static void listMembers() {
 		output("");
 		for (Member member : library.getMembers()) {
