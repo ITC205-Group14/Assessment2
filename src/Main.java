@@ -135,7 +135,6 @@ public class Main {
 	}
 
 
-
 	private static void listBooks() {
 		output("");
 		for (book book : library.getBooks()) {
@@ -151,7 +150,6 @@ public class Main {
 			output(member + "\n");
 		}
 	}
-
 
 
 	private static void borrowBook() {
