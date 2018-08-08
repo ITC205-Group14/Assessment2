@@ -16,23 +16,23 @@ public class Main {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("\nLibrary Main Menu\n\n")
-		  .append("  M  : add member\n")
-		  .append("  LM : list members\n")
-		  .append("\n")
-		  .append("  B  : add book\n")
-		  .append("  LB : list books\n")
-		  .append("  FB : fix books\n")
-		  .append("\n")
-		  .append("  L  : take out a loan\n")
-		  .append("  R  : return a loan\n")
-		  .append("  LL : list loans\n")
-		  .append("\n")
-		  .append("  P  : pay fine\n")
-		  .append("\n")
-		  .append("  T  : increment date\n")
-		  .append("  Q  : quit\n")
-		  .append("\n")
-		  .append("Choice : ");
+		.append("  M  : add member\n")
+		.append("  LM : list members\n")
+		.append("\n")
+		.append("  B  : add book\n")
+		.append("  LB : list books\n")
+		.append("  FB : fix books\n")
+		.append("\n")
+		.append("  L  : take out a loan\n")
+		.append("  R  : return a loan\n")
+		.append("  LL : list loans\n")
+		.append("\n")
+		.append("  P  : pay fine\n")
+		.append("\n")
+		.append("  T  : increment date\n")
+		.append("  Q  : quit\n")
+		.append("\n")
+		.append("Choice : ");
 
 		return sb.toString();
 	}
@@ -72,19 +72,19 @@ public class Main {
 					listMembers();
 					break;
 
-				case "B": 
+				case "B":
 					addBook();
 					break;
 
-				case "LB": 
+				case "LB":
 					listBooks();
 					break;
 
 				case "FB":
 					fixBooks();
 					break;
-					
-				case "L": 
+
+				case "L":
 					borrowBook();
 					break;
 
@@ -92,19 +92,19 @@ public class Main {
 					returnBook();
 					break;
 
-				case "LL": 
+				case "LL":
 					listCurrentLoans();
 					break;
 
-				case "P": 
+				case "P":
 					payFine();
 					break;
 
-				case "T": 
+				case "T":
 					incrementDate();
 					break;
 
-				case "Q": 
+				case "Q":
 					quit = true;
 					break;
 
@@ -122,8 +122,8 @@ public class Main {
 	}
 
 	private static void payFine() {
-		PayFineControl payFineControl = new PayFineControl(); 
-		new PayFineUI(payFineControl).run();		
+		PayFineControl payFineControl = new PayFineControl();
+		new PayFineUI(payFineControl).run();
 	}
 
 
@@ -174,13 +174,13 @@ public class Main {
 			int days = Integer.valueOf(input("Enter number of days: ")).intValue();
 			calendar.incrementDate(days);
 			LIB.checkCurrentLoans();
-			
+
 			Date date = calendar.Date();
 			String formattedDate = simpleDateFormat.format(date);
 			output(formattedDate);
 
 		} catch (NumberFormatException e) {
-			 output("\nInvalid number of days\n");
+			output("\nInvalid number of days\n");
 		}
 	}
 
@@ -206,7 +206,7 @@ public class Main {
 			output("\n" + member + "\n");
 
 		} catch (NumberFormatException e) {
-			 output("\nInvalid phone number\n");
+			output("\nInvalid phone number\n");
 		}
 
 	}
