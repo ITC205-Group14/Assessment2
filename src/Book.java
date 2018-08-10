@@ -2,7 +2,7 @@ import java.io.Serializable;
 
 
 @SuppressWarnings("serial")
-public class book implements Serializable {
+public class Book implements Serializable {
 	
 	private String Title;
 	private String Author;
@@ -12,7 +12,7 @@ public class book implements Serializable {
 	private State state;
 	
 	
-	public book(String author, String title, String callNo, int id) {
+	public Book(String author, String title, String callNo, int id) {
 		this.Author = author;
 		this.Title = title;
 		this.CallNo = callNo;

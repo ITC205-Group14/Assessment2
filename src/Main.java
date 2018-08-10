@@ -48,7 +48,7 @@ public class Main {
 				output(m);
 			}
 			output(" ");
-			for (book b : LIB.getBooks()) {
+			for (Book b : LIB.getBooks()) {
 				output(b);
 			}
 						
@@ -127,7 +127,7 @@ public class Main {
 
 	private static void listCurrentLoans() {
 		output("");
-		for (loan loan : LIB.getCurrentLoans()) {
+		for (Loan loan : LIB.getCurrentLoans()) {
 			output(loan + "\n");
 		}		
 	}
@@ -136,7 +136,7 @@ public class Main {
 
 	private static void listBooks() {
 		output("");
-		for (book book : LIB.getBooks()) {
+		for (Book book : LIB.getBooks()) {
 			output(book + "\n");
 		}		
 	}
@@ -185,7 +185,7 @@ public class Main {
 		String author = input("Enter author: ");
 		String title  = input("Enter title: ");
 		String callNo = input("Enter call number: ");
-		book book = LIB.addBook(author, title, callNo);
+		Book book = LIB.addBook(author, title, callNo);
 		output("\n" + book + "\n");
 		
 	}

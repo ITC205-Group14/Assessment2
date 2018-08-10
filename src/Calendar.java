@@ -33,6 +33,15 @@ public class Calendar {
 			throw new RuntimeException(e);}
 		}	
 	
+	public void incrementDate(int days) {		
+		
+	}
+
+	public Date Date() {
+	
+		return null;
+	}
+	
 
 	private void set(int time, int i) {
 		try {
@@ -71,4 +80,6 @@ public class Calendar {
 	    long diffDays = TimeUnit.DAYS.convert(diffMillis, TimeUnit.MILLISECONDS);
 	    return diffDays;
 	}
+
+	
 }
