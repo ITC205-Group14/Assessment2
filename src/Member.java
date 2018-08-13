@@ -14,7 +14,7 @@ public class Member implements Serializable {
 	private int phoneNumber;
 	private int id;
 	private double fines;
-	private Map<Integer, loan> loans;
+	private Map<Integer, Loan> loans;
 
 	
 	public Member(String lastName, String firstName, String email, int phoneNo, int id) {
@@ -37,7 +37,7 @@ public class Member implements Serializable {
 		  .append(String.format("  Fines Owed :  $%.2f", fines))
 		  .append("\n");
 
-		for (loan loan : loans.values()) {
+		for (Loan loan : loans.values()) {
 			sb.append(loan).append("\n");
 		}
 		return sb.toString();
@@ -49,9 +49,9 @@ public class Member implements Serializable {
 	}
 
 
-	public List<loan> getLoans() {
-		Collection<loan> loanValues = loans.values();
-		ArrayList<loan> loanList = new ArrayList<loan>(loanValues); 
+	public List<Loan> getLoans() {
+		Collection<Loan> loanValues = loans.values();
+		ArrayList<Loan> loanList = new ArrayList<Loan>(loanValues); 
 		return loanList;
 	}
 
@@ -66,7 +66,7 @@ public class Member implements Serializable {
 	}
 
 
-	public void takeOutLoan(loan loan) {
+	public void takeOutLoan(Loan loan) {
 		int loanId = loan.getId();
 		if (!loans.containsKey(loanId)) {
 			loans.put(loanId, loan);
@@ -108,15 +108,15 @@ public class Member implements Serializable {
 	}
 
 
-	public void dischargeLoan(loan loan) {
+	public void dischargeLoan(Loan loan) {
 		int loanId = loan.getId();
 		if (loans.containsKey(loanId)) {
 			loans.remove(loanId);
 		}
 		else {
 			throw new RuntimeException("No such loan held by member");
-		}
+		}		
 	}
-
-
+	
+	
 }

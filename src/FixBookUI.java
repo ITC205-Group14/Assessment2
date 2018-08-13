@@ -63,8 +63,7 @@ public class FixBookUI {
 				output("Unhandled state");
 				throw new RuntimeException("FixBookUI : unhandled state :" + state);				
 			}		
-		}
-		
+		}		
 	}
 
 	

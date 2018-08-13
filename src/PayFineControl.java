@@ -8,7 +8,7 @@ public class PayFineControl {
 
 	
 	public PayFineControl() {
-		this.library = library.getInstance();
+		this.library = Library.getInstance();
 		state = CONTROL_STATE.INITIALISED;
 	}
 	
@@ -59,5 +59,5 @@ public class PayFineControl {
 		return change;
 	}
 	
-
+	
 }

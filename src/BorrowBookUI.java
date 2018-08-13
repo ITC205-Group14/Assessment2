@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class BorrowBookUI {
 	
 	public static enum UiState { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
-
 	private BorrowBookControl control;
 	private Scanner input;
 	private UiState state;
@@ -100,8 +99,11 @@ public class BorrowBookUI {
 			}
 		}		
 	}
+	
 
 	public void display(Object object) {
 		output(object);		
 	}
+	
+	
 }

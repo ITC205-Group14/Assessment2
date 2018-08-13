@@ -2,18 +2,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BorrowBookControl {	
+	
 	private BorrowBookUI ui;	
 	private Member member;
 	private Library library;
 	private enum ControlState { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
 	private ControlState state;	
-	private List<book> pendingBooks;
-	private List<loan> completedLoans;
-	private book book;
+	private List<Book> pendingBooks;
+	private List<Loan> completedLoans;
+	private Book book;
 	
 	
 	public BorrowBookControl() {
-		this.library = library.getInstance();
+		this.library = Library.getInstance();
 		state = ControlState.INITIALISED;
 	}
 	
@@ -59,12 +60,12 @@ public class BorrowBookControl {
 		if (book == null) {
 			ui.display("Invalid bookId");
 			return;		}
-		if (!book.Available()) {
+		if (!book.isAvailable()) {
 			ui.display("Book cannot be borrowed");
 			return;
 		}
 		pendingBooks.add(book);
-		for (book book : pendingBooks) {
+		for (Book book : pendingBooks) {
 			ui.display(book.toString());
 		}
 		if (library.getLoansRemainingForMember(member) - pendingBooks.size() == 0) {
@@ -80,10 +81,10 @@ public class BorrowBookControl {
 		}
 		else {
 			ui.display("\nFinal Borrowing List");
-			for (book book : pendingBooks) {
+			for (Book book : pendingBooks) {
 				ui.display(book.toString());
 			}
-			completedLoans = new ArrayList<loan>();
+			completedLoans = new ArrayList<Loan>();
 			ui.setState(BorrowBookUI.UiState.FINALISING);
 			state = ControlState.FINALISING;
 		}
@@ -94,12 +95,12 @@ public class BorrowBookControl {
 		if (!state.equals(ControlState.FINALISING)) {
 			throw new RuntimeException("BorrowBookControl: cannot call commitLoans except in FINALISING state");
 		}	
-		for (book book : pendingBooks) {
-			loan loan = library.issueLoan(book, member);
+		for (Book book : pendingBooks) {
+			Loan loan = library.issueLoan(book, member);
 			completedLoans.add(loan);			
 		}
 		ui.display("Completed Loan Slip");
-		for (loan loan : completedLoans) {
+		for (Loan loan : completedLoans) {
 			ui.display(loan.toString());
 		}
 		ui.setState(BorrowBookUI.UiState.COMPLETED);
@@ -111,5 +112,6 @@ public class BorrowBookControl {
 		ui.setState(BorrowBookUI.UiState.CANCELLED);
 		state = ControlState.CANCELLED;
 	}	
+	
 	
 }
