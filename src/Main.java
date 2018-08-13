@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 public class Main {
 	
+
 	private static Scanner input;
 	private static Library library;
 	private static String menu;
 	private static Calendar calendar;
-	private static SimpleDateFormat simpleDateFormat;
-	
+	private static SimpleDateFormat simpleDateFormat;	
 	
 	private static String getMenu() {
 		StringBuilder stringBuilder = new StringBuilder();
@@ -33,18 +33,20 @@ public class Main {
 		.append("Choice : ");
 		return stringBuilder.toString();
 	}
-	
-	
+
+
 	public static void main(String[] args) {
 		try {
 			input = new Scanner(System.in);
 			library = Library.getInstance();
 			calendar = Calendar.getInstance();
 			simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			
 			for (Member member : library.getMembers()) {
 				output(member);
 			}
 			output(" ");
+			
 			for (Book book : library.getBooks()) {
 				output(book);
 			}
@@ -87,6 +89,7 @@ public class Main {
 				case "Q":
 					running = true;
 					break;
+
 				default:
 					output("\nInvalid option\n");
 					break;
@@ -98,8 +101,8 @@ public class Main {
 		}
 		output("\nEnded\n");
 	}
-	
-	
+
+
 	private static void payFine() {
 		PayFineControl payFineControl = new PayFineControl();
 		new PayFineUI(payFineControl).run();
@@ -119,8 +122,12 @@ public class Main {
 		for (Book book : library.getBooks()) {
 			output(book + "\n");
 		}
-	}
 	
+		for (Loan loan : library.getCurrentLoans()) {
+			output(loan + "\n");
+		}
+	}
+
 	
 	private static void listMembers() {
 		output("");
@@ -128,6 +135,8 @@ public class Main {
 			output(member + "\n");
 		}
 	}
+	
+	
 	private static void borrowBook() {
 		BorrowBookControl borrowBookControl = new BorrowBookControl();
 		new BorrowBookUI(borrowBookControl).run();
@@ -168,7 +177,7 @@ public class Main {
 		output("\n" + book + "\n");
 	}
 	
-	
+
 	private static void addMember() {
 		try {
 			String lastName = input("Enter last name: ");
