@@ -115,8 +115,8 @@ public class Member implements Serializable {
 		}
 		else {
 			throw new RuntimeException("No such loan held by member");
-		}
+		}		
 	}
-
-
+	
+	
 }

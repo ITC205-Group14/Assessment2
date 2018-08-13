@@ -7,16 +7,16 @@ public class Loan implements Serializable {
 	
 	public static enum LoanState { CURRENT, OVER_DUE, DISCHARGED };
 	
-	private int Id;
-	private Book Book;
+	private int id;
+	private Book book;
 	private Member member;
 	private Date date;
 	private LoanState state;
 
 	
 	public Loan(int loanId, Book book, Member member, Date dueDate) {
-		this.Id = loanId;
-		this.Book = book;
+		this.id = loanId;
+		this.book = book;
 		this.member = member;
 		this.date = dueDate;
 		this.state = LoanState.CURRENT;
@@ -25,7 +25,7 @@ public class Loan implements Serializable {
 	
 	public void checkOverDue() {
 		if (state == LoanState.CURRENT &&
-			Calendar.getInstance().Date().after(date)) {
+			Calendar.getInstance().getDate().after(date)) {
 			this.state = LoanState.OVER_DUE;			
 		}
 	}
@@ -37,7 +37,7 @@ public class Loan implements Serializable {
 
 	
 	public Integer getId() {
-		return Id;
+		return id;
 	}
 
 
@@ -50,29 +50,30 @@ public class Loan implements Serializable {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 		StringBuilder loanDetail = new StringBuilder();
-		loanDetail.append("Loan:  ").append(Id).append("\n")
+		loanDetail.append("Loan:  ").append(id).append("\n")
 		  .append("  Borrower ").append(member.getId()).append(" : ")
 		  .append(member.getLastName()).append(", ").append(member.getFirstName()).append("\n")
-		  .append("  Book ").append(Id).append(" : " )
-		  .append(Book.Title()).append("\n")
+		  .append("  Book ").append(id).append(" : " )
+		  .append(book.getTitle()).append("\n")
 		  .append("  DueDate: ").append(dateFormat).append("\n")
 		  .append("  State: ").append(state);		
 		return loanDetail.toString();
 	}
 
 
-	public Member member() {
+	public Member getMember() {
 		return member;
 	}
 
 
-	public Book Book() {
-		return Book;
+	public Book getBook() {
+		return book;
 	}
 
 
 	public Loan() {
 		state = LoanState.DISCHARGED;		
 	}
-
+	
+	
 }

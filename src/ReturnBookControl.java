@@ -8,7 +8,7 @@ public class ReturnBookControl {
 	
 
 	public ReturnBookControl() {
-		this.library = library.getInstance();
+		this.library = Library.getInstance();
 		state = CONTROL_STATE.INITIALISED;
 	}
 	
@@ -35,7 +35,7 @@ public class ReturnBookControl {
 			ui.display("Invalid Book Id");
 			return;
 		}
-		if (!currentBook.On_loan()) {
+		if (!currentBook.onLoan()) {
 			ui.display("Book has not been borrowed");
 			return;
 		}		

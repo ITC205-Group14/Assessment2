@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BorrowBookControl {	
+	
 	private BorrowBookUI ui;	
 	private Member member;
 	private Library library;
@@ -13,7 +14,7 @@ public class BorrowBookControl {
 	
 	
 	public BorrowBookControl() {
-		this.library = library.getInstance();
+		this.library = Library.getInstance();
 		state = ControlState.INITIALISED;
 	}
 	
@@ -59,7 +60,7 @@ public class BorrowBookControl {
 		if (book == null) {
 			ui.display("Invalid bookId");
 			return;		}
-		if (!book.Available()) {
+		if (!book.isAvailable()) {
 			ui.display("Book cannot be borrowed");
 			return;
 		}
@@ -111,5 +112,6 @@ public class BorrowBookControl {
 		ui.setState(BorrowBookUI.UiState.CANCELLED);
 		state = ControlState.CANCELLED;
 	}	
+	
 	
 }
