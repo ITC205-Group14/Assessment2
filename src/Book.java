@@ -66,13 +66,13 @@ public class Book implements Serializable {
 	}
 
 	
-	public void returns(boolean DAMAGED) 
+	public void returns(boolean damaged) 
 	{
 		if (state.equals(State.ON_LOAN)) {
-			if (DAMAGED) {
-			state = State.DAMAGED;
+			if (damaged) {
+				state = State.DAMAGED;
 			} else {
-			state = State.AVAILABLE;
+				state = State.AVAILABLE;
 			}
 		} else {
 			throw new RuntimeException(String.format("Book: cannot Return while book is in state: %s", state));
