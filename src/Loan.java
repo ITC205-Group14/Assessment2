@@ -55,7 +55,7 @@ public class Loan implements Serializable {
 		  .append(member.getLastName()).append(", ").append(member.getFirstName()).append("\n")
 		  .append("  Book ").append(id).append(" : " )
 		  .append(book.getTitle()).append("\n")
-		  .append("  DueDate: ").append(dateFormat).append("\n")
+		  .append("  DueDate: ").append(date).append("\n")
 		  .append("  State: ").append(state);		
 		return loanDetail.toString();
 	}
