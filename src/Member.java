@@ -16,7 +16,7 @@ public class Member implements Serializable {
 	private double fines;
 	private Map<Integer, Loan> loans;
 
-	
+
 	public Member(String lastName, String firstName, String email, int phoneNo, int id) {
 		this.lastName = lastName;
 		this.firstName = firstName;
@@ -27,15 +27,16 @@ public class Member implements Serializable {
 	}
 
 
+	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Member:  ").append(id).append("\n")
-		  .append("  Name:  ").append(lastName).append(", ").append(firstName).append("\n")
-		  .append("  Email: ").append(emailAddress).append("\n")
-		  .append("  Phone: ").append(phoneNumber)
-		  .append("\n")
-		  .append(String.format("  Fines Owed :  $%.2f", fines))
-		  .append("\n");
+		.append("  Name:  ").append(lastName).append(", ").append(firstName).append("\n")
+		.append("  Email: ").append(emailAddress).append("\n")
+		.append("  Phone: ").append(phoneNumber)
+		.append("\n")
+		.append(String.format("  Fines Owed :  $%.2f", fines))
+		.append("\n");
 
 		for (Loan loan : loans.values()) {
 			sb.append(loan).append("\n");
@@ -51,7 +52,7 @@ public class Member implements Serializable {
 
 	public List<Loan> getLoans() {
 		Collection<Loan> loanValues = loans.values();
-		ArrayList<Loan> loanList = new ArrayList<Loan>(loanValues); 
+		ArrayList<Loan> loanList = new ArrayList<Loan>(loanValues);
 		return loanList;
 	}
 
@@ -115,8 +116,8 @@ public class Member implements Serializable {
 		}
 		else {
 			throw new RuntimeException("No such loan held by member");
-		}		
+		}
 	}
-	
-	
+
+
 }
