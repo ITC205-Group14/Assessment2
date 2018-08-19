@@ -3,14 +3,13 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
-	
 
 	private static Scanner input;
 	private static Library library;
 	private static String menu;
 	private static Calendar calendar;
-	private static SimpleDateFormat simpleDateFormat;	
-	
+	private static SimpleDateFormat simpleDateFormat;
+
 	private static String getMenu() {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("\nLibrary Main Menu\n\n")
@@ -41,19 +40,20 @@ public class Main {
 			library = Library.getInstance();
 			calendar = Calendar.getInstance();
 			simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-			
+
 			for (Member member : library.getMembers()) {
 				output(member);
 			}
 			output(" ");
-			
+
 			for (Book book : library.getBooks()) {
 				output(book);
 			}
 			menu = getMenu();
 			boolean running = false;
 			while (!running) {
-				output("\n" + simpleDateFormat.format(calendar.getDate()));
+				Date date = calendar.getDate();
+				output("\n" + simpleDateFormat.format(date));
 				String userChoice = input(menu);
 				switch (userChoice.toUpperCase()) {
 				case "M":
@@ -107,54 +107,54 @@ public class Main {
 		PayFineControl payFineControl = new PayFineControl();
 		new PayFineUI(payFineControl).run();
 	}
-	
-	
+
+
 	private static void listCurrentLoans() {
 		output("");
 		for (Loan loan : library.getCurrentLoans()) {
 			output(loan + "\n");
 		}
 	}
-	
-	
+
+
 	private static void listBooks() {
 		output("");
 		for (Book book : library.getBooks()) {
 			output(book + "\n");
 		}
-	
+
 		for (Loan loan : library.getCurrentLoans()) {
 			output(loan + "\n");
 		}
 	}
 
-	
+
 	private static void listMembers() {
 		output("");
 		for (Member member : library.getMembers()) {
 			output(member + "\n");
 		}
 	}
-	
-	
+
+
 	private static void borrowBook() {
 		BorrowBookControl borrowBookControl = new BorrowBookControl();
 		new BorrowBookUI(borrowBookControl).run();
 	}
-	
-	
+
+
 	private static void returnBook() {
 		ReturnBookControl returnBookControl = new ReturnBookControl();
 		new ReturnBookUI(returnBookControl).run();
 	}
-	
-	
+
+
 	private static void fixBooks() {
 		FixBookControl fixBookControl = new FixBookControl();
 		new FixBookUI(fixBookControl).run();
 	}
-	
-	
+
+
 	private static void incrementDate() {
 		try {
 			int days = Integer.valueOf(input("Enter number of days: ")).intValue();
@@ -167,8 +167,8 @@ public class Main {
 			output("\nInvalid number of days\n");
 		}
 	}
-	
-	
+
+
 	private static void addBook() {
 		String author = input("Enter author: ");
 		String title  = input("Enter title: ");
@@ -176,7 +176,7 @@ public class Main {
 		Book book = library.addBook(author, title, callNo);
 		output("\n" + book + "\n");
 	}
-	
+
 
 	private static void addMember() {
 		try {
@@ -191,14 +191,14 @@ public class Main {
 			output("\nInvalid phone number\n");
 		}
 	}
-	
-	
+
+
 	private static String input(String prompt) {
 		System.out.print(prompt);
 		return input.nextLine();
 	}
-	
-	
+
+
 	private static void output(Object object) {
 		System.out.println(object);
 	}

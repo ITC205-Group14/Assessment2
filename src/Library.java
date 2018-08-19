@@ -34,7 +34,7 @@ public class Library implements Serializable {
 	private Map<Integer, Loan> loans;
 	private Map<Integer, Loan> currentLoans;
 	private Map<Integer, Book> damagedBooks;
-	
+
 
 	private Library() {
 		catalog = new HashMap<>();
@@ -52,11 +52,12 @@ public class Library implements Serializable {
 		if (self == null) {
 			Path path = Paths.get(libraryFile);
 			if (Files.exists(path)) {
-				try (ObjectInputStream lof = new ObjectInputStream(new FileInputStream(libraryFile));) {
+				try (FileInputStream fileInputStream = new FileInputStream(libraryFile);
+						ObjectInputStream libraryInputStream = new ObjectInputStream(fileInputStream);) {
 
-					self = (Library) lof.readObject();
+					self = (Library) libraryInputStream.readObject();
 					Calendar.getInstance().setDate(self.loanDate);
-					lof.close();
+					libraryInputStream.close();
 				}
 				catch (Exception e) {
 					throw new RuntimeException(e);
@@ -71,10 +72,11 @@ public class Library implements Serializable {
 	public static synchronized void save() {
 		if (self != null) {
 			self.loanDate = Calendar.getInstance().getDate();
-			try (ObjectOutputStream lof = new ObjectOutputStream(new FileOutputStream(libraryFile));) {
-				lof.writeObject(self);
-				lof.flush();
-				lof.close();
+			try (FileOutputStream fileOutputStream = new FileOutputStream(libraryFile);
+					ObjectOutputStream libraryOutputStream = new ObjectOutputStream(fileOutputStream);) {
+				libraryOutputStream.writeObject(self);
+				libraryOutputStream.flush();
+				libraryOutputStream.close();
 			}
 			catch (Exception e) {
 				throw new RuntimeException(e);
@@ -114,7 +116,7 @@ public class Library implements Serializable {
 		return memberList;
 	}
 
-	
+
 	public List<Book> getBooks() {
 		Collection<Book> booksCollection = catalog.values();
 		ArrayList<Book> booksList = new ArrayList<Book>(booksCollection);
@@ -262,7 +264,7 @@ public class Library implements Serializable {
 		else {
 			throw new RuntimeException("Library: repairBook: book is not damaged");
 		}
-	}	
-	
-	
+	}
+
+
 }
