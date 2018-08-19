@@ -66,9 +66,11 @@ public class BorrowBookControl {
 		}
 		pendingBooks.add(book);
 		for (Book book : pendingBooks) {
-			ui.display(book.toString());
+			String bookString = book.toString();
+			ui.display(bookString);
 		}
-		if (library.getLoansRemainingForMember(member) - pendingBooks.size() == 0) {
+		int loansRemaining = library.getLoansRemainingForMember(member) - pendingBooks.size();
+		if (loansRemaining == 0) {
 			ui.display("Loan limit reached");
 			complete();
 		}
@@ -82,7 +84,8 @@ public class BorrowBookControl {
 		else {
 			ui.display("\nFinal Borrowing List");
 			for (Book book : pendingBooks) {
-				ui.display(book.toString());
+				String bookString = book.toString();
+				ui.display(bookString);
 			}
 			completedLoans = new ArrayList<Loan>();
 			ui.setState(BorrowBookUI.UiState.FINALISING);
@@ -101,7 +104,8 @@ public class BorrowBookControl {
 		}
 		ui.display("Completed Loan Slip");
 		for (Loan loan : completedLoans) {
-			ui.display(loan.toString());
+			String loanString = loan.toString();
+			ui.display(loanString);
 		}
 		ui.setState(BorrowBookUI.UiState.COMPLETED);
 		state = ControlState.COMPLETED;
