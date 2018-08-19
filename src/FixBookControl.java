@@ -39,7 +39,8 @@ public class FixBookControl {
 			ui.display("\"Book has not been damaged");
 			return;
 		}
-		ui.display(currentBook.toString());
+		String currentBookString = currentBook.toString();
+		ui.display(currentBookString);
 		ui.setState(FixBookUI.UiState.FIXING);
 		state = ControlState.FIXING;		
 	}

@@ -53,7 +53,8 @@ public class PayFineControl {
 		if (change > 0) {
 			ui.display(String.format("Change: $%.2f", change));
 		}
-		ui.display(member.toString());
+		String memberString = member.toString();
+		ui.display(memberString);
 		ui.setState(PayFineUI.UiState.COMPLETED);
 		state = ControlState.COMPLETED;
 		return change;
