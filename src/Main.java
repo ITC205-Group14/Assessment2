@@ -52,7 +52,8 @@ public class Main {
 			menu = getMenu();
 			boolean running = false;
 			while (!running) {
-				output("\n" + simpleDateFormat.format(calendar.getDate()));
+				Date date = calendar.getDate();
+				output("\n" + simpleDateFormat.format(date));
 				String userChoice = input(menu);
 				switch (userChoice.toUpperCase()) {
 				case "M":
