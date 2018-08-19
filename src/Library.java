@@ -34,7 +34,7 @@ public class Library implements Serializable {
 	private Map<Integer, Loan> loans;
 	private Map<Integer, Loan> currentLoans;
 	private Map<Integer, Book> damagedBooks;
-	
+
 
 	private Library() {
 		catalog = new HashMap<>();
@@ -52,7 +52,8 @@ public class Library implements Serializable {
 		if (self == null) {
 			Path path = Paths.get(libraryFile);
 			if (Files.exists(path)) {
-				try (ObjectInputStream lof = new ObjectInputStream(new FileInputStream(libraryFile));) {
+				try (FileInputStream fis = new FileInputStream(libraryFile);
+						ObjectInputStream lof = new ObjectInputStream(fis);) {
 
 					self = (Library) lof.readObject();
 					Calendar.getInstance().setDate(self.loanDate);
@@ -71,7 +72,8 @@ public class Library implements Serializable {
 	public static synchronized void save() {
 		if (self != null) {
 			self.loanDate = Calendar.getInstance().getDate();
-			try (ObjectOutputStream lof = new ObjectOutputStream(new FileOutputStream(libraryFile));) {
+			try (FileOutputStream fos = new FileOutputStream(libraryFile);
+					ObjectOutputStream lof = new ObjectOutputStream(fos);) {
 				lof.writeObject(self);
 				lof.flush();
 				lof.close();
@@ -114,7 +116,7 @@ public class Library implements Serializable {
 		return memberList;
 	}
 
-	
+
 	public List<Book> getBooks() {
 		Collection<Book> booksCollection = catalog.values();
 		ArrayList<Book> booksList = new ArrayList<Book>(booksCollection);
@@ -262,7 +264,7 @@ public class Library implements Serializable {
 		else {
 			throw new RuntimeException("Library: repairBook: book is not damaged");
 		}
-	}	
-	
-	
+	}
+
+
 }
